@@ -39,6 +39,3 @@ logs/
 - Docker 容器日誌: `docker-compose logs -f [service_name]`
 - 直接存取此目錄中的檔案
 
-## 注意事項
-
-此目錄被 git 忽略，避免大型日誌檔案被提交到版本庫中。

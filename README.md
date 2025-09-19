@@ -149,8 +149,11 @@ stop_standalone.bat
 | **📋 核心程式** |
 | `dags/` | Airflow DAG 定義 | ETL 管線編排邏輯 |
 | `src/` | ETL 模組程式碼 | 資料處理核心功能 |
+| `scripts/` | 獨立執行腳本 | 測試與工具程式 |
 | **📊 資料與配置** |
-| `data/` | 資料目錄 | 原始資料、報告輸出 |
+| `data/raw/` | 原始資料目錄 | Excel 檔案存放 |
+| `data/quality_reports/` | 品質報告目錄 | Excel 報告輸出 |
+| `logs/` | 日誌目錄 | Airflow 執行日誌 |
 | `.env.example` | 環境變數範本 | 配置檔案範例 |
 | `.env` | 環境變數配置 | 資料庫連線、路徑設定 |
 | `requirements.txt` | Python 依賴清單 | 套件安裝規格 |
@@ -285,20 +288,26 @@ retail_etl_standalone/
 ├── 💻 ETL 核心程式
 │   └── src/
 │       ├── etl/                   # ETL 處理模組
-│       ├── configs/               # 配置檔案
-│       ├── sql/                   # SQL 腳本
+│       │   ├── extract/           # 資料擷取
+│       │   ├── transform/         # 資料轉換
+│       │   ├── load/              # 資料載入
+│       │   ├── data_quality.py    # 品質檢查
+│       │   └── quality_monitoring.py # 品質監控
+│       ├── configs/               # YAML 配置檔案
+│       ├── sql/                   # SQL 腳本 (create_tables.sql, dq_checks.sql)
 │       └── utils/                 # 工具函數
+├── 🧪 測試與工具
+│   └── scripts/
+│       └── export_quality_data.py # 獨立品質監控腳本
 ├── 📊 資料存儲
 │   └── data/
 │       ├── raw/                   # 原始 Excel 檔案
-│       ├── processed/             # 中間處理檔案
-│       └── quality_reports/       # DQ 報告輸出
+│       └── quality_reports/       # Excel 品質報告輸出
 ├── 📝 日誌系統
-│   └── logs/                      # 應用程式日誌
+│   └── logs/                      # Airflow 執行日誌
 └── ⚙️ 配置檔案
     ├── .env.example               # 環境變數範本
-    ├── .env                       # 環境變數配置
-    └── CLAUDE.md                  # AI 助手指南
+    └── .env                       # 環境變數配置
 ```
 
 ## ⚙️ Airflow DAG 設計

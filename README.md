@@ -351,10 +351,6 @@ cleanup_staging ← notify_success ← run_quality_monitoring ← run_dq_checks
 docker exec retail_etl_standalone-airflow-webserver-1 \
   python /opt/airflow/dags/retail_etl_dag.py
 
-# 測試特定任務
-docker exec retail_etl_standalone-airflow-webserver-1 \
-  airflow tasks test retail_etl_pipeline extract_data 2024-01-01
-
 # 測試完整 DAG
 docker exec retail_etl_standalone-airflow-webserver-1 \
   airflow dags test retail_etl_pipeline 2024-01-01
@@ -379,15 +375,7 @@ SELECT
 ls -la data/quality_reports/
 ```
 
-### 獨立測試腳本
 
-```bash
-# 測試完整品質監控流程（無需 Airflow）
-python scripts/export_quality_data.py
-
-# 測試資料庫連線
-python -c "from src.etl.extract.retail_extract import RetailExtractor; RetailExtractor().test_connection()"
-```
 
 ## 📊 監控與警示
 

@@ -11,6 +11,7 @@
 
 # Claude Code IDE files
 .claude/
+CLAUDE.md
 
 # =============================================================================
 # Data Files - Keep structure but ignore actual data files

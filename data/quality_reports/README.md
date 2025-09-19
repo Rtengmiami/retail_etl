@@ -1,35 +1,35 @@
-# Quality Reports Directory
+# 品質報告目錄
 
-This directory contains automatically generated data quality reports in Excel format.
+此目錄包含自動生成的 Excel 格式資料品質報告。
 
-## Report Format
+## 報告格式
 
-**Filename Pattern**: `data_quality_report_YYYYMMDD_HHMM.xlsx`
+**檔名格式**: `data_quality_report_YYYYMMDD_HHMM.xlsx`
 
-## Report Contents
+## 報告內容
 
-Each Excel file contains 7 worksheets:
+每個 Excel 檔案包含 7 個工作表:
 
-| Worksheet | Description |
-|-----------|-------------|
-| **Daily_Quality_Metrics** | Daily sales metrics, outlier detection, quality scores |
-| **Customer_Data_Quality** | Customer ID completeness analysis |
-| **Return_Rate_Analysis** | Return rate trends and anomaly detection |
-| **Product_Quality** | Product data completeness metrics |
-| **Overall_Summary** | High-level statistics and execution summary |
-| **Anomaly_Details** | Detailed list of detected anomalies |
-| **Monthly_Trends** | Monthly aggregated trends and patterns |
+| 工作表名稱 | 說明 |
+|-----------|------|
+| **Daily_Quality_Metrics** | 每日銷售指標、異常值偵測、品質評分 |
+| **Customer_Data_Quality** | 客戶ID完整性分析 |
+| **Return_Rate_Analysis** | 退貨率趨勢與異常偵測 |
+| **Product_Quality** | 產品資料完整性指標 |
+| **Overall_Summary** | 高階統計資料與執行摘要 |
+| **Anomaly_Details** | 偵測到的異常詳細清單 |
+| **Monthly_Trends** | 月度匯總趨勢與模式 |
 
-## Usage
+## 使用方式
 
-- **Business Intelligence**: Import directly into Tableau, PowerBI, or Excel
-- **Quality Monitoring**: Track data quality trends over time
-- **Anomaly Detection**: Identify and investigate data quality issues
+- **商業智慧**: 直接匯入 Tableau、PowerBI 或 Excel
+- **品質監控**: 追蹤資料品質的時間趨勢
+- **異常偵測**: 識別與調查資料品質問題
 
-## Retention
+## 保留政策
 
-Reports are generated after each ETL execution and retained for historical analysis.
+報告在每次 ETL 執行後產生，並保留供歷史分析使用。
 
-## Note
+## 注意事項
 
-This directory is ignored by git to prevent large report files from being committed to the repository.
+此目錄被 git 忽略，避免大型報告檔案被提交到版本庫中。

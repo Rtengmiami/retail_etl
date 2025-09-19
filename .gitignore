@@ -1,0 +1,225 @@
+# =============================================================================
+# Online Retail II ETL Pipeline - Git Ignore Configuration
+# =============================================================================
+
+# =============================================================================
+# Environment and Secrets
+# =============================================================================
+.env
+*.env
+!.env.example
+
+# Claude Code IDE files
+.claude/
+
+# =============================================================================
+# Data Files - Keep structure but ignore actual data files
+# 資料檔案 - 保留目錄結構但忽略實際資料檔案
+# =============================================================================
+# Raw data files
+data/raw/*.xlsx
+data/raw/*.csv
+data/raw/*.json
+data/raw/*.txt
+data/raw/*.xml
+
+# Processed data files (temporary/intermediate files)
+data/processed/
+
+# Quality reports - ignore generated Excel reports
+data/quality_reports/*
+!data/quality_reports/.gitkeep
+
+# Backup and temporary data files
+data/backup/
+data/temp/
+data/tmp/
+
+# =============================================================================
+# Logs - Keep structure but ignore log contents
+# 日誌檔案 - 保留目錄結構但忽略日誌內容
+# =============================================================================
+logs/*
+!logs/.gitkeep
+
+# Airflow logs
+logs/dag_id=*/
+logs/dag_processor_manager/
+logs/scheduler/
+*.log
+*.log.*
+
+# =============================================================================
+# Python Files
+# =============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# =============================================================================
+# Docker and Containers
+# =============================================================================
+# Docker volumes and data
+postgres-db-volume/
+postgres-retail-volume/
+
+# Docker compose override files
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# =============================================================================
+# IDE and Editor Files
+# =============================================================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# =============================================================================
+# macOS and Windows
+# =============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# =============================================================================
+# Temporary and Backup Files
+# =============================================================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*~
+
+# =============================================================================
+# Airflow Specific
+# =============================================================================
+# Airflow database files
+airflow.db
+airflow.cfg
+unittests.cfg
+
+# Airflow plugins compiled
+plugins/__pycache__/
+
+# =============================================================================
+# Project Specific
+# =============================================================================
+# Old backup files
+*.py.bak
+*.yaml.bak
+*.yml.bak
+*.sql.bak
+
+# Test output files
+test_output/
+test_reports/
+
+# Performance profiling
+*.prof
+*.profile
+
+# =============================================================================
+# Keep Essential Structure Files
+# =============================================================================
+# These files ensure directory structure is preserved
+!**/.gitkeep
+!**/README.md

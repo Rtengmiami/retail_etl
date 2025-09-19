@@ -1,0 +1,78 @@
+pipeline:
+  name: "retail_etl_pipeline"
+  version: "1.0.0"
+  description: "ETL pipeline for Online Retail II dataset"
+
+source:
+  type: "excel"
+  path: "online_retail_II.xlsx"
+  sheet_name: 0
+  encoding: "utf-8"
+
+database:
+  type: "postgresql"
+  host: "${DB_HOST}"
+  port: "${DB_PORT}"
+  name: "${DB_NAME}"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+
+processing:
+  batch_size: 10000
+  dedup_keys: ["Invoice", "StockCode", "InvoiceDate"]
+  date_format: "%Y-%m-%d %H:%M:%S"
+  
+validation:
+  rules:
+    - field: "Customer ID"
+      type: "not_null"
+      action: "drop"
+    - field: "Price"
+      type: "greater_than"
+      value: 0
+      action: "flag"
+    - field: "Quantity"
+      type: "less_than"
+      value: 1000
+      action: "flag"
+    - field: "StockCode"
+      type: "not_null"
+      action: "drop"
+
+dimensions:
+  time:
+    date_column: "InvoiceDate"
+    extract_components: ["year", "month", "day", "day_of_week", "quarter"]
+  
+  product:
+    key_column: "StockCode"
+    description_column: "Description"
+  
+  customer:
+    key_column: "Customer ID"
+    country_column: "Country"
+    
+  country:
+    key_column: "Country"
+
+fact_table:
+  name: "fact_sales"
+  measures: ["Quantity", "Price"]
+  calculated_fields:
+    total_amount: "Quantity * Price"
+    is_return: "Invoice LIKE 'C%' OR Quantity < 0"
+
+monitoring:
+  log_level: "INFO"
+  metrics:
+    - "rows_processed"
+    - "rows_rejected" 
+    - "processing_time"
+    - "data_quality_score"
+  
+airflow:
+  schedule_interval: "0 2 * * *"  # Daily at 2 AM
+  max_active_runs: 1
+  catchup: false
+  retries: 2
+  retry_delay_minutes: 5

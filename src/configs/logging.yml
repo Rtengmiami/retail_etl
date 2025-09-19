@@ -1,0 +1,49 @@
+version: 1.0
+disable_existing_loggers: false
+
+formatters:
+  standard:
+    format: '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+  
+  json:
+    format: '{"timestamp": "%(asctime)s", "level": "%(levelname)s", "logger": "%(name)s", "message": "%(message)s", "module": "%(module)s", "function": "%(funcName)s", "line": %(lineno)d}'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: standard
+    stream: ext://sys.stdout
+  
+  file:
+    class: logging.FileHandler
+    level: INFO
+    formatter: json
+    filename: ${CONTAINER_PROJECT_PATH}/logs/etl_pipeline.log
+    mode: 'a'
+    encoding: utf-8
+  
+  error_file:
+    class: logging.FileHandler
+    level: ERROR
+    formatter: json
+    filename: ${CONTAINER_PROJECT_PATH}/logs/etl_errors.log
+    mode: 'a'
+    encoding: utf-8
+
+loggers:
+  retail_etl:
+    level: INFO
+    handlers: [console, file, error_file]
+    propagate: false
+  
+  data_quality:
+    level: INFO
+    handlers: [console, file]
+    propagate: false
+
+root:
+  level: INFO
+  handlers: [console]
